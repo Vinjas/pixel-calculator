@@ -96,7 +96,7 @@
     background: var(--equal-butoon);
 }
 
-#0 {
+/*#0 {
     display: grid;
     grid-column-start: 0;
     grid-column-end: 2;
@@ -105,4 +105,4 @@
 #decimal {
     grid-row-start: 4;
     grid-row-end: 5;
-}
+}*/
