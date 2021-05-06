@@ -1,16 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 :root {
-    --base: #424242;
-    --base-shadow: #383838;
-    --c-button: #E3344B;
-    --operator: #9F9F9F;
+    --black: #181818;
+    --base: #306182;
+    --button: #5D678A;
+    --button-border: #1D2D44;
+    --equal-butoon: #E53B44;
+    --equal-butoon-border: #A92430;
+    --operator: #2F733F;
+    --operator-border: #0C462A;
+    --coma: #B2528A;
+    --coma-shadow: #90437A;
+    --screen: #C0CCDC;
+    --screen-border-out: #262A45;
+    --screen-border-in: #5A698A;
+
     --operator-button-shadow: #B6B6B6;
-    --equal-butoon: #F79700;
-    --screen: #A2BF52;
+
 }
 #calculator {
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'VT323', monospace;    
+    font-size: 50px;
     color: white;
     width: 100%;
     max-width: 500px;
@@ -18,6 +28,7 @@
 }
 
 #result {
+    color: var(--black);
     display: grid;
     grid-template-rows: 40px 60px;
     align-items: end;
@@ -25,26 +36,28 @@
     text-align: end;
 
     background-color: var(--screen);
-    border: 5px solid var(--operator-button-shadow);
-    border-radius: 5px;
+    
+    box-shadow: 0px 0px 0px 10px var(--screen-border-out);
+    border: 10px solid var(--screen-border-in);
+    outline: 2px solid var(--black);
 
     padding-right: 20px;
     margin: 0 30px 20px 30px;
 }
+
 #operation {
-    font-size: 24px;
+    font-size: 35px;
 }
 #final-result {
-    font-size: 42px;
+    font-size: 55px;
 }
-
 
 #calculator-base {
     display: grid;
     grid-template-columns: repeat(4, 22%);
     grid-template-rows: repeat(5, 85px);
     justify-content: center;
-    font-size: 24px;
+    font-size: 45px;
 }
 
 /*#row1 #row2 #row3 #row4 #row5 {
@@ -56,21 +69,28 @@
     display: grid;
     justify-content: center;
     align-content: center;
-    margin: 7px;
-    background: linear-gradient(0deg, rgba(189,189,189,1) 0%, rgba(157,157,157,1) 100%);;
-    border: 5px solid var(--operator-button-shadow);
-    border-radius: 5px;
+    margin: 10px;
+    background: var(--operator);
+    border: 4px solid var(--operator-border);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.37);
 }
 
 .numeral {
-    background: linear-gradient(0deg, rgba(73,73,73,1) 0%, rgba(61,61,61,1) 100%);
-    border-color: var(--base-shadow);
+    background: var(--button);
+    border-color: var(--button-border);
 }
 
 .equal {
     background: var(--equal-butoon);
+    border-color: var(--equal-butoon-border);
+}
+
+.coma {
+    background: var(--coma);
+    border-color: var(--coma-shadow);
+
 }
 
 #C {
-    background: var(--c-button);
+    background: var(--equal-butoon);
 }

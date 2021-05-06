@@ -11,8 +11,7 @@ class Calculator extends React.Component {
         }
     }
     componentDidMount() {
-        //document.body.style.backgroundColor = "#494949"
-        document.body.style.background = "linear-gradient(0deg, rgba(73,73,73,1) 0%, rgba(61,61,61,1) 100%)"
+        document.body.style.backgroundColor = "#306182"
     }
 
     render() {
@@ -29,7 +28,7 @@ class Calculator extends React.Component {
                         className="calc-key"
                         id="F">F</div>
                         <div
-                        className="calc-key"
+                        className="calc-key equal"
                         id="C">C</div>
                         <div
                         className="calc-key"
@@ -80,7 +79,7 @@ class Calculator extends React.Component {
                         className="calc-key numeral"
                         id="0">0</div>
                         <div
-                        className="calc-key numeral"
+                        className="calc-key coma"
                         id="decimal">,</div>
                         <div
                         className="calc-key equal"
