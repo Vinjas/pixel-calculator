@@ -7,8 +7,7 @@ class Calculator extends React.Component {
         super(props)
         this.state = {
             result: 0,
-            input: [],
-            operator: "",
+            input: [""],
         }
         this.addNumber = this.addNumber.bind(this)
         this.addDecimal = this.addDecimal.bind(this)
@@ -23,21 +22,42 @@ class Calculator extends React.Component {
     addNumber(number) {  
         // INICIO --> INPUT Y RESULTADO ES 0
         this.setState({
-            input: this.state.input.push(number)
+            input: this.state.input.concat(number)
         })
     }
 
     // TECLA DECIMAL
     addDecimal() {
+        this.setState ({
+            input: this.state.input.concat(".")
+        })
     }
 
     // TECLA OPERADOR
     addOperator(operator) {
+        if (this.state.input.join("").match(/([+]|[-]|[/]|[*])$/) ) {
+            this.setState ({
+                input: this.state.input.slice(0, -1).concat(operator)
+            })
+        } else if (this.state.input.join("") === "") {
+            this.setState ({
+                input: this.state.input.concat(this.state.result + operator)
+            })
+        }  else {
+            this.setState ({
+                result: eval(this.state.input.join("")),
+                input: this.state.input.concat(operator)
+            })
+        }
     }
 
     // TECLA IGUAL
     // Varía en función de el último operador en Input, en caso de varias operaciones seguidas
     equals() {
+        this.setState({
+            result: eval(this.state.input.join("")),
+            input: []
+        })
     }
 
     // TECLA C
@@ -46,10 +66,8 @@ class Calculator extends React.Component {
         this.setState({
             result: 0,
             input: [],
-            operator: "",
         })
     }
-
 
     render() {
         return (
