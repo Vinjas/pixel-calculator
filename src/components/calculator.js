@@ -37,12 +37,17 @@ class Calculator extends React.Component {
             this.state.decimal === false 
             && this.state.operator === ""
             ) {
-            return this.setState({
+            this.setState({
                 actualResult: parseFloat("" + this.state.actualResult + number),
-                input: this.state.prevInput + this.state.input + number,
+                input: this.state.input + number,
                 prevInput: "",
+                
             })
-
+            if (this.state.result > 0) {
+                this.setState({
+                    prevResult: this.state.result,
+                })
+            }
         // AÑADE DECIMAL    
         } else if (this.state.decimal === true) {
             return this.setState({
@@ -50,54 +55,15 @@ class Calculator extends React.Component {
                 input: parseFloat("" + this.state.input + "." + number),
                 decimal: false,
             })    
-        } else if (this.state.operator == "+") {
+        } else if (this.state.operator.match(/[+]|[-]|[*]|[/]/g)) {
             this.setState({
                 input: this.state.prevInput + number,
                 actualResult: parseFloat("" + number),
                 operator: "",
             })
-            {/*switch (this.state.operator) {
-                case "+":
-                    this.setState({
-                        input: this.state.prevInput + number,
-                        actualResult: parseFloat("" + number),
-                        operator: "",
-                    })
-                    break
-                default:
-                    return this.setState({
-                        operator: "",
-                    })  
-            }*/}
         }
-
-
-
-        // CHECK IF AN OPERATOR HAS BEEN PRESSED
-        {/* if (this.state.prevResult /= 0) {
-            if (this.state.operator === "+") {
-                this.setState({
-                    input: this.state.prevInput + number,
-                    actualResult: parseFloat("" + number),
-                    operator: "",
-                })
-            }
-            
-            switch (this.state.operator) {
-                case "+":
-                    this.setState({
-                        input: this.state.prevInput + number,
-                        actualResult: parseFloat("" + number),
-                        operator: "",
-                    })
-                    break
-                default:
-                    return this.setState({
-                        operator: "",
-                    })  
-            }
-        } */}
     }
+
     // TECLA DECIMAL
     addDecimal() {
         this.setState({
@@ -114,11 +80,36 @@ class Calculator extends React.Component {
             input: this.state.input + operator,
             operator: operator,
         })
+        if (this.state.input.match(/([+][\d]+$)/g)) {
+            this.setState({
+                result: this.state.prevResult + this.state.actualResult,
+                decimal: false,
+                operator: "",
+            })
+        } else if (this.state.input.match(/([-][\d]+$)/g)) {
+            this.setState({
+                result: this.state.prevResult - this.state.actualResult,
+                decimal: false,
+                operator: "",
+            })
+        } else if (this.state.input.match(/([*][\d]+$)/g)) {
+            this.setState({
+                result: this.state.prevResult * this.state.actualResult,
+                decimal: false,
+                operator: "",
+            })
+        } else if (this.state.input.match(/([/][\d]+$)/g)) {
+            this.setState({
+                result: this.state.prevResult / this.state.actualResult,
+                decimal: false,
+                operator: "",
+            })
+        } 
     }
 
     // TECLA IGUAL
     equals() {
-        if (this.state.input.includes("+")) {
+        if (this.state.input.match(/([+][\d]+$)/g)) {
             this.setState({
                 result: this.state.prevResult + this.state.actualResult,
                 input: 0,
@@ -128,7 +119,37 @@ class Calculator extends React.Component {
                 decimal: false,
                 operator: "",
             })
-        }     
+        } else if (this.state.input.match(/([-][\d]+$)/g)) {
+            this.setState({
+                result: this.state.prevResult - this.state.actualResult,
+                input: 0,
+                prevInput: "",
+                actualResult: this.state.prevResult - this.state.actualResult,
+                prevResult: 0,
+                decimal: false,
+                operator: "",
+            })
+        }   else if (this.state.input.match(/([/][\d]+$)/g)) {
+                this.setState({
+                    result: this.state.prevResult / this.state.actualResult,
+                    input: 0,
+                    prevInput: "",
+                    actualResult: this.state.prevResult / this.state.actualResult,
+                    prevResult: 0,
+                    decimal: false,
+                    operator: "",
+            })
+        } else if (this.state.input.match(/([*][\d]+$)/g)) {
+            this.setState({
+                result: this.state.prevResult * this.state.actualResult,
+                input: 0,
+                prevInput: "",
+                actualResult: this.state.prevResult * this.state.actualResult,
+                prevResult: 0,
+                decimal: false,
+                operator: "",
+            })
+        }
     }
 
     //TECLA C
@@ -143,7 +164,6 @@ class Calculator extends React.Component {
             operator: "",
         })
     }
-
 
 
     render() {
@@ -167,11 +187,13 @@ class Calculator extends React.Component {
 
                         <div
                         className="calc-key"
-                        id="divide">/</div>
+                        id="divide"
+                        onClick={() => this.addOperator("/")}>/</div>
 
                         <div
                         className="calc-key"
-                        id="multiple">*</div>
+                        id="multiple"
+                        onClick={() => this.addOperator("*")}>*</div>
 
                         <div
                         className="calc-key numeral"
