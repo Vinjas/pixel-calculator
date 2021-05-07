@@ -83,37 +83,37 @@ class Calculator extends React.Component {
             operator: operator,
         })
         // COMPROBAR SI SE HA INTRODUCIDO UN OPERADOR YA
-        if (this.state.input.match(/([+]|[-]|[/]|[*])$/)) {
+        if (this.state.input.toString().match(/([+]|[-]|[/]|[*])$/)) {
             this.setState({
                 prevInput: this.state.input.slice(0 ,-1) + operator,
                 input: this.state.input.slice(0 ,-1) + operator,
                 operator: operator,
             })
-        } else if (this.state.input.match(/([+][\d]+$)/g)) {
+        } else if (this.state.input.toString().match(/([+][\d]+$)/g)) {
             this.setState({
                 result: this.state.prevResult + this.state.actualResult,
                 decimal: false,
                 operator: "",
             })
-        } else if (this.state.input.match(/([-][\d]+$)/g)) {
+        } else if (this.state.input.toString().match(/([-][\d]+$)/g)) {
             this.setState({
                 result: this.state.prevResult - this.state.actualResult,
                 decimal: false,
                 operator: "",
             })
-        } else if (this.state.input.match(/([*][\d]+$)/g)) {
+        } else if (this.state.input.toString().match(/([*][\d]+$)/g)) {
             this.setState({
                 result: this.state.prevResult * this.state.actualResult,
                 decimal: false,
                 operator: "",
             })
-        } else if (this.state.input.match(/([/][\d]+$)/g)) {
+        } else if (this.state.input.toString().match(/([/][\d]+$)/g)) {
             this.setState({
                 result: this.state.prevResult / this.state.actualResult,
                 decimal: false,
                 operator: "",
             })
-        } else if (this.state.input.match(/([+]|[-]|[/]|[*])$/)) {
+        } else if (this.state.input.toString().match(/([+]|[-]|[/]|[*])$/)) {
             this.setState({
                 prevInput: this.state.input + operator,
                 input: this.state.input + operator,
@@ -125,7 +125,7 @@ class Calculator extends React.Component {
     // TECLA IGUAL
     // Varía en función de el último operador en Input, en caso de varias operaciones seguidas
     equals() {
-        if (this.state.input.match(/([+][\d]+$)/g)) {
+        if (this.state.input.toString().match(/([+][\d]+$)/g)) {
             this.setState({
                 result: this.state.prevResult + this.state.actualResult,
                 input: 0,
@@ -135,7 +135,7 @@ class Calculator extends React.Component {
                 decimal: false,
                 operator: "",
             })
-        } else if (this.state.input.match(/([-][\d]+$)/g)) {
+        } else if (this.state.input.toString().match(/([-][\d]+$)/g)) {
             this.setState({
                 result: this.state.prevResult - this.state.actualResult,
                 input: 0,
@@ -145,7 +145,7 @@ class Calculator extends React.Component {
                 decimal: false,
                 operator: "",
             })
-        } else if (this.state.input.match(/([/][\d]+$)/g)) {
+        } else if (this.state.input.toString().match(/([/][\d]+$)/g)) {
                 this.setState({
                     result: this.state.prevResult / this.state.actualResult,
                     input: 0,
@@ -155,7 +155,7 @@ class Calculator extends React.Component {
                     decimal: false,
                     operator: "",
             })
-        } else if (this.state.input.match(/([*][\d]+$)/g)) {
+        } else if (this.state.input.toString().match(/([*][\d]+$)/g)) {
             this.setState({
                 result: this.state.prevResult * this.state.actualResult,
                 input: 0,
