@@ -1,5 +1,7 @@
 import React from "react"
 import Calculator from "../components/calculator.js"
+import CalculatorTest from "../components/calculator.test.js"
+
 
 class CalculatorContainer extends React.Component {
     constructor(props) {
@@ -8,7 +10,7 @@ class CalculatorContainer extends React.Component {
     render() {
         return (
             <div id="App">
-                <Calculator />
+                <CalculatorTest />
             </div>
             
         )
